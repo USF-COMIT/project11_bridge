@@ -14,3 +14,5 @@ ros2_ws/install/
 ros2_ws/log/
 
 ros1_ws/.catkin_workspace
+
+*.user
