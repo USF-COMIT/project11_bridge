@@ -1,0 +1,9 @@
+[submodule "ros2_ws/src/project11_msgs"]
+	path = ros2_ws/src/project11_msgs
+	url = https://github.com/USF-COMIT/project11_msgs.git
+[submodule "ros1_ws/src/project11_msgs"]
+	path = ros1_ws/src/project11_msgs
+	url = https://github.com/CCOMJHC/project11_msgs.git
+[submodule "ros2_ws/src/ros1_bridge"]
+	path = ros2_ws/src/ros1_bridge
+	url = https://github.com/ros2/ros1_bridge.git
