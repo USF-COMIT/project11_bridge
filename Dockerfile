@@ -16,24 +16,36 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ros-noetic-ros-comm=1.16.0-1* \
     ros-noetic-roscpp-tutorials=0.10.2-1* \
     ros-noetic-rospy-tutorials=0.10.2-1* \
+    ros-noetic-geographic-msgs\
     && rm -rf /var/lib/apt/lists/*
 
 # install ros2 packages
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ros-foxy-demo-nodes-cpp=0.9.4-1* \
     ros-foxy-demo-nodes-py=0.9.4-1* \
+    ros-foxy-geographic-msgs\
     && rm -rf /var/lib/apt/lists/*
 
-copy ./build.sh /usr/local/project1_bridge/
+copy ./build.sh /usr/local/project11_bridge/
+copy ./run.sh /usr/local/project11_bridge/
 
-copy ./ros1_ws/src/ /usr/local/project1_bridge/ros1_ws/src/
-copy ./ros1_ws/build_ros1.sh /usr/local/project1_bridge/ros1_ws/
+copy ./ros1_ws/src/ /usr/local/project11_bridge/ros1_ws/src/
+copy ./ros1_ws/build_ros1.sh /usr/local/project11_bridge/ros1_ws/
 
-copy ./ros2_ws/src/ /usr/local/project1_bridge/ros2_ws/src/
-copy ./ros2_ws/build_ros2.sh /usr/local/project1_bridge/ros2_ws/
+copy ./ros2_ws/src/ /usr/local/project11_bridge/ros2_ws/src/
+copy ./ros2_ws/build_*.sh /usr/local/project11_bridge/ros2_ws/
+
+# grab all dependencies
+RUN apt-get update
+RUN rosdep update --include-eol-distros
+RUN export DEBIAN_FRONTEND=noninteractive && rosdep install --from-paths /usr/local/project11_bridge/ros1_ws/src --ignore-src -r -y
+RUN export DEBIAN_FRONTEND=noninteractive && rosdep install --from-paths /usr/local/project11_bridge/ros2_ws/src --ignore-src -r -y
+
+
+RUN /usr/local/project11_bridge/build.sh
 
 
 # setup entrypoint
 #COPY ./ros_entrypoint.sh /
 
-ENTRYPOINT /bin/bash -c "/bin/bash"
+ENTRYPOINT /usr/local/project11_bridge/run.sh
