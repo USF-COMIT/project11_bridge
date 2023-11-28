@@ -13,8 +13,8 @@ ROS_VERSION=${ROS_VERSION:-noetic}
 
 version="0.0.1" #"$(git describe --tags)$([ -z "$(git diff)" ] || echo "-untracked")"
 
-CONTAINER_NAME=project11
-CONTAINER_IMAGE=project11:$version
+CONTAINER_NAME=project11_bridge
+CONTAINER_IMAGE=project11_bridge:$version
 SHELL=/bin/bash
 
 
@@ -33,10 +33,6 @@ function run {
         -it \
         --privileged \
         --net=host \
-        --env="DISPLAY=${DISPLAY}" \
-        --env="QT_X11_NO_MITSHM=1" \
-        --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
-	    --volume="/home/maptastic/data:/data" \
         --workdir "/usr/local/ros" \
         --name $CONTAINER_NAME \
         $CONTAINER_IMAGE $SHELL
