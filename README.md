@@ -15,7 +15,7 @@ Project11 Bridge utilizes several technologies to maintain portability across Ub
 
 ### Note about ROS versions
 
-
+The current release of Project11 Bridge Targets Ubuntu 20.04, ROS1 Noetic and ROS2 Foxy.   If you are running Project11 Bridge in a docker container on a 22.04 system (ros2 Humble) or later you may have compatibility issues since ROS2 messages are not guaranteed to be compatible between versions of ROS2.
 
 ## Installation
 
@@ -40,43 +40,15 @@ Open a terminal and move to the root the `project11_bridge` directory the build 
 ./dockerize.sh build
 ```
 
-Then you can run the image.   This will effectively give you a ROS1 shell.
+### Step 4 : Run It
+
+Then you can run the image.   This will start a ROS1 bridge that supports all of the Project11 messages as well as the built in ROS messages.    It will automatically bridge any broadcast topic between ROS1 and ROS2
 
 ```bash
 ./dockerize.sh run
 ```
 
-From there we can do normal Project11 things!  For example:
+Project 11 is running in a docker container which can run on any version of Ubuntu after 20.04.&#x20;
 
-{% code lineNumbers="true" %}
-```bash
-source ${ROS1_WS_PATH}/devel/setup.bash
-roslaunch project11_simulation sim_local.launch
-```
-{% endcode %}
 
-and BAM,   Project 11 is running on Ubuntu 22.04!
-
-## Using it with ROS2
-
-Let's assume you are running the `sim_local.launch` file described in the last step.
-
-begin by attaching another terminal to the project11 docker container. &#x20;
-
-{% code lineNumbers="true" %}
-```bash
-cd <your project11_bridge directory>
-./dockerize.sh attach
-```
-{% endcode %}
-
-Now you have access to another shell in the docker container and source both ROS workspaces
-
-{% code lineNumbers="true" %}
-```bash
-source ${ROS1_WS_PATH}/devel/setup.bash
-source ${ROS2_WS_PATH}/install/setup.bash
-ros2 run ros1_bridge dynamic_bridge --bridge-all-topics
-```
-{% endcode %}
 
