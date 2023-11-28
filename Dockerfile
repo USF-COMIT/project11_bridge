@@ -13,17 +13,17 @@ ENV ROS2_DISTRO foxy
 
 # install ros packages
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    ros-noetic-ros-comm=1.16.0-1* \
-    ros-noetic-roscpp-tutorials=0.10.2-1* \
-    ros-noetic-rospy-tutorials=0.10.2-1* \
-    ros-noetic-geographic-msgs\
+    ros-${ROS1_DISTRO}-ros-comm=1.16.0-1* \
+    ros-${ROS1_DISTRO}-roscpp-tutorials=0.10.2-1* \
+    ros-${ROS1_DISTRO}-rospy-tutorials=0.10.2-1* \
+    ros-${ROS1_DISTRO}-geographic-msgs\
     && rm -rf /var/lib/apt/lists/*
 
 # install ros2 packages
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    ros-foxy-demo-nodes-cpp=0.9.4-1* \
-    ros-foxy-demo-nodes-py=0.9.4-1* \
-    ros-foxy-geographic-msgs\
+    ros-${ROS2_DISTRO}-demo-nodes-cpp=0.9.4-1* \
+    ros-${ROS2_DISTRO}-demo-nodes-py=0.9.4-1* \
+    ros-${ROS2_DISTRO}-geographic-msgs\
     && rm -rf /var/lib/apt/lists/*
 
 copy ./build.sh /usr/local/project11_bridge/
