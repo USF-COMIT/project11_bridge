@@ -50,5 +50,7 @@ Then you can run the image.   This will start a ROS1 bridge that supports all of
 
 Project 11 is running in a docker container which can run on any version of Ubuntu after 20.04.&#x20;
 
+### Credits
 
+This package was created by Kris Krasnosky of the [USF COMIT](https://github.com/USF-COMIT) group and offered under the BSD 2-clause License to mirror the license of Project11.
 
